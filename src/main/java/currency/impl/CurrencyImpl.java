@@ -1,4 +1,111 @@
 package currency.impl;
 
+import currency.dao.data.Currency;
+import currency.dao.repository.CurrencyRepository;
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
+
+import java.util.Date;
+import java.util.List;
+
 public class CurrencyImpl {
+    @Inject
+    CurrencyRepository currencyRepository;
+
+    public Response currencyListAll() {
+        try {
+            List<Currency> currencyList = currencyRepository.currencyListAll();
+            JsonArray jsonCurrency = new JsonArray(currencyList);
+            Response response = Response.ok(jsonCurrency).build();
+            if (response.getStatus() == 200) {
+                if (currencyList.isEmpty()) {
+                    JsonObject jsonResponseCurrencyAll = new JsonObject();
+                    jsonResponseCurrencyAll.put("message", "No existe información registrada");
+                    response = Response.ok(jsonResponseCurrencyAll).build();
+                }
+                return Response.ok(response.getEntity()).build();
+            }
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
+        return Response.serverError().build();
+    }
+
+    public Response currencyFindById(JsonObject jsonDataCurrency) {
+        try {
+            JsonObject jsonCurrency = new JsonObject();
+            long id = Long.parseLong(jsonDataCurrency.getString("id"));
+            Currency currency = currencyRepository.currencyFindById(id);
+
+            if (currency == null) {
+                jsonCurrency.put("message", "No existe la información solicitada");
+                return Response.ok(jsonCurrency).build();
+            }
+            JsonObject jsonArrayCurrencyById = new JsonObject(Json.encode(currency));
+            if (jsonArrayCurrencyById.isEmpty()) {
+                jsonCurrency.put("message", "No existe la información solicitada");
+                return Response.ok(jsonCurrency).build();
+            }
+            Response response = Response.ok(jsonArrayCurrencyById).build();
+            if (response.getStatus() == 200) {
+                return Response.ok(response.getEntity()).build();
+            }
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
+        return Response.serverError().build();
+    }
+
+    public Response currencySave(JsonObject jsonDataCurrency) {
+        JsonObject jsonResponseCreateCurrency = new JsonObject();
+        try {
+            Currency currency = new Currency();
+            currency.description = jsonDataCurrency.getString("description");
+            currency.abbreviation = jsonDataCurrency.getString("abbreviation");
+            currency.userCreate = jsonDataCurrency.getInteger("userCreate");
+            currency.dateCreate = new Date();
+            currencyRepository.currencySave(currency);
+            jsonResponseCreateCurrency.put("message", "La moneda " + jsonDataCurrency.getString("description") + " ha sido registrada");
+            return Response.ok(jsonResponseCreateCurrency).build();
+        } catch (Exception e) {
+            return Response.accepted(jsonResponseCreateCurrency.put("message", e.getMessage())).build();
+        }
+    }
+
+    public Response currencyDelete(JsonObject jsonDataCurrency) {
+        try {
+            JsonObject jsonResponseDeleteCurrency = new JsonObject();
+            long id = Long.parseLong(jsonDataCurrency.getString("id"));
+            long responseDelete = currencyRepository.currencyDelete(id);
+            if (responseDelete <= 0) {
+                jsonDataCurrency.put("message", "La moneda: " + jsonDataCurrency.getString("description") + " no existe");
+                return Response.ok(jsonDataCurrency).build();
+            }
+            jsonDataCurrency.put("message", "La moneda " + jsonDataCurrency.getString("description") + " ha sido eliminada");
+            return Response.ok(jsonDataCurrency).build();
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
+    }
+
+    public Response currencyUpdate(JsonObject jsonDataCurrency) {
+        try {
+            JsonObject jsonResponseUpdateCurrency = new JsonObject();
+            Currency currency = new Currency();
+            currency.idCurrency = jsonDataCurrency.getLong("id");
+            currency.description = jsonDataCurrency.getString("description");
+            currency.abbreviation = jsonDataCurrency.getString("abbreviation");
+            currency.userCreate = jsonDataCurrency.getInteger("user_create");
+            currency.dateCreate = new Date();
+            currencyRepository.currencySave(currency);
+            jsonResponseUpdateCurrency.put("message", "La moneda " + jsonResponseUpdateCurrency.getString("description").toUpperCase() + " ha sido actualizada");
+            Response response = Response.ok(jsonResponseUpdateCurrency).build();
+            return Response.ok(response.getEntity()).build();
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
+    }
 }

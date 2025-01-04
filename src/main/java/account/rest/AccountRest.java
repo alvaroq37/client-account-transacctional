@@ -23,7 +23,7 @@ public class AccountRest {
     @POST
     @Path("/list/all")
     public Response clientListAll() {
-        return accountImpl.accountListAll();
+        return Response.ok(accountImpl.accountListAll()).build();
     }
 
     @POST

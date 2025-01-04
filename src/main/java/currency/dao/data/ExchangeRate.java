@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-public class ExchangeCurrency {
+@Entity
+@Table(name = "t_exchange_rate")
+public class ExchangeRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_exchange")
-    public Long idExchange;
+    @Column(name = "id_exchange_rate")
+    public Long idExchangeRate;
     @Column(name = "purchase_exchange_rate")
     public Double purchaseExchangeRate;
     @Column(name = "exchange_rate_sale")
