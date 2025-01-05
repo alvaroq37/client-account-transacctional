@@ -14,7 +14,7 @@ import transactional.dao.repository.TransactionalRepository;
 import java.util.List;
 
 @ApplicationScoped
-public class TransactionalImpl {
+public class  TransactionalImpl {
 
     JsonObject jsonResponse = new JsonObject();
     ObjectMapper mapper = new ObjectMapper();
@@ -132,12 +132,12 @@ public class TransactionalImpl {
                 return Response.ok(jsonResponse).build();
             }
 
-            Transactional transacctional = new Transactional();
-            transacctional.id = jsonDataAccount.getLong("id");
-            transacctional.amount = jsonDataAccount.getLong("amount");
-            transacctional.date = jsonDataAccount.getString("date_create");
-            transacctional.hour = jsonDataAccount.getString("hour");
-            transacctional.account = account;
+            Transactional transactional = new Transactional();
+            transactional.id = jsonDataAccount.getLong("id");
+            transactional.amount = jsonDataAccount.getLong("amount");
+            transactional.date = jsonDataAccount.getString("date_create");
+            transactional.hour = jsonDataAccount.getString("hour");
+            transactional.account = account;
 
             accountRepository.accountUpdate(account);
             jsonResponseClientUpdate.put("message", "Transacción Nro. " + id + " actualizada correctamente");

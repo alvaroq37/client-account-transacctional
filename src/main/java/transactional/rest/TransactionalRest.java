@@ -54,5 +54,4 @@ public class TransactionalRest {
     public Response transactionalDelete(JsonObject jsonDataTransactional){
         return transactionalImpl.transactionalDelete(jsonDataTransactional);
     }
-
 }

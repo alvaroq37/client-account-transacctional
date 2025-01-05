@@ -22,36 +22,41 @@ public class ClientRest {
     @POST
     @Path("/list/all")
     public Response clientListAll() {
-        return clientImpl.clientListAll();
+        return Response.ok(clientImpl.clientListAll()).build();
     }
 
     @POST
     @Path("/find/by/id")
-    public Response clientFindById(JsonObject jsonClient) {
-        return clientImpl.clientFindById(jsonClient);
+    public Response clientFindById(JsonObject data) {
+        return Response.ok(clientImpl.clientFindById(data)).build();
     }
 
     @POST
     @Path("/find/by/name")
-    public Response clientFindByNames(JsonObject jsonClient) {
-        return clientImpl.clientFindByName(jsonClient);
+    public Response clientFindByNames(JsonObject data) {
+        return Response.ok( clientImpl.clientFindByName(data)).build();
+    }
+    @POST
+    @Path("/find/by/document/number")
+    public Response clientFindByDocumentNumber(JsonObject data) {
+        return Response.ok( clientImpl.clientFindByDocumentNumber(data)).build();
     }
 
     @POST
     @Path("/save")
-    public Response clientSave(JsonObject jsonClient) {
-        return clientImpl.citySave(jsonClient);
+    public Response clientSave(JsonObject data) {
+        return Response.ok(clientImpl.clientSave(data)).build();
     }
 
     @POST
     @Path("/update")
-    public Response clientUpdate(JsonObject jsonClient) {
-        return clientImpl.clientUpdate(jsonClient);
+    public Response clientUpdate(JsonObject data) {
+        return Response.ok( clientImpl.clientUpdate(data)).build();
     }
 
     @POST
     @Path("/delete")
-    public Response clientDelete(JsonObject jsonClient) {
-        return clientImpl.clientDelete(jsonClient);
+    public Response clientDelete(JsonObject data) {
+        return Response.ok(clientImpl.clientDelete(data)).build();
     }
 }

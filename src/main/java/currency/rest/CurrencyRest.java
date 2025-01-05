@@ -25,22 +25,26 @@ public class CurrencyRest {
     }
 
     @POST
+    @Path("/find/by/id")
+    public Response currencyFindById(JsonObject data) {
+        return currencyImpl.currencyFindById(data);
+    }
+    
+    @POST
     @Path("/save")
-    public Response currencySave(JsonObject jsonCurrency) {
-        return currencyImpl.currencySave(jsonCurrency);
+    public Response currencySave(JsonObject data) {
+        return currencyImpl.currencySave(data);
     }
 
     @PUT
     @Path("/update")
-    public Response currencyUpdate(JsonObject jsonCurrency) {
-        return currencyImpl.currencyUpdate(jsonCurrency);
+    public Response currencyUpdate(JsonObject data) {
+        return currencyImpl.currencyUpdate(data);
     }
 
     @POST
     @Path("/delete")
-    public Response currencyDelete(JsonObject jsonCurrency) {
-        return currencyImpl.currencyDelete(jsonCurrency);
+    public Response currencyDelete(JsonObject data) {
+        return currencyImpl.currencyDelete(data);
     }
-
-
 }
