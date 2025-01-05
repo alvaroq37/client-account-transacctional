@@ -1,6 +1,6 @@
-package client.rest;
+package customer.rest;
 
-import client.impl.ClientImpl;
+import customer.impl.ClientImpl;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -11,10 +11,10 @@ import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
 @Transactional
-@Path("rest/client")
+@Path("rest/customer")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ClientRest {
+public class CustomerRest {
 
     @Inject
     ClientImpl clientImpl;
@@ -48,13 +48,13 @@ public class ClientRest {
         return Response.ok(clientImpl.clientSave(data)).build();
     }
 
-    @POST
+    @PUT
     @Path("/update")
     public Response clientUpdate(JsonObject data) {
         return Response.ok( clientImpl.clientUpdate(data)).build();
     }
 
-    @POST
+    @DELETE
     @Path("/delete")
     public Response clientDelete(JsonObject data) {
         return Response.ok(clientImpl.clientDelete(data)).build();

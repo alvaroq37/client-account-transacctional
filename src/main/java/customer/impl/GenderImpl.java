@@ -1,7 +1,7 @@
-package client.impl;
+package customer.impl;
 
-import client.dao.data.Gender;
-import client.dao.repository.GenderRepository;
+import customer.dao.data.Gender;
+import customer.dao.repository.GenderRepository;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

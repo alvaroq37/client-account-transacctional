@@ -1,11 +1,11 @@
-package client.impl;
+package customer.impl;
 
-import client.dao.data.Client;
-import client.dao.data.Document;
-import client.dao.data.Gender;
-import client.dao.repository.ClientRepository;
-import client.dao.repository.DocumentRepository;
-import client.dao.repository.GenderRepository;
+import customer.dao.data.Customer;
+import customer.dao.data.Document;
+import customer.dao.data.Gender;
+import customer.dao.repository.CustomerRepository;
+import customer.dao.repository.DocumentRepository;
+import customer.dao.repository.GenderRepository;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -18,7 +18,7 @@ import java.util.List;
 public class ClientImpl {
     Messages messages = new Messages();
     @Inject
-    ClientRepository clientRepository;
+    CustomerRepository customerRepository;
     @Inject
     GenderRepository genderRepository;
     @Inject
@@ -26,9 +26,9 @@ public class ClientImpl {
 
     public JsonObject clientListAll() {
         try {
-            List<Client> clientList = clientRepository.clientListAll();
-            if (!clientList.isEmpty()) {
-                return new JsonObject().put("response", clientList);
+            List<Customer> customerList = customerRepository.clientListAll();
+            if (!customerList.isEmpty()) {
+                return new JsonObject().put("response", customerList);
             } else {
                 return messages.messageListEmpty();
             }
@@ -41,9 +41,9 @@ public class ClientImpl {
         try {
             Long idClient = data.getLong("idClient");
             if (idClient > 0) {
-                Client client = clientRepository.clientFindById(idClient);
-                if (client.idClient > 0) {
-                    return new JsonObject().put("response", client);
+                Customer customer = customerRepository.clientFindById(idClient);
+                if (customer.idClient > 0) {
+                    return new JsonObject().put("response", customer);
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -59,9 +59,9 @@ public class ClientImpl {
         try {
             String documentNumber = data.getString("documentNumber");
             if (!documentNumber.isEmpty()) {
-                Client client = clientRepository.clientFindByDocumentNumber(documentNumber);
-                if (!client.documentNumber.isEmpty()) {
-                    return new JsonObject().put("response", client);
+                Customer customer = customerRepository.clientFindByDocumentNumber(documentNumber);
+                if (!customer.documentNumber.isEmpty()) {
+                    return new JsonObject().put("response", customer);
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -77,9 +77,9 @@ public class ClientImpl {
         try {
             String name = data.getString("name");
             if (!name.isEmpty()) {
-                Client client = clientRepository.clientFindByDocumentNumber(name);
-                if (client.idClient > 0) {
-                    return new JsonObject().put("response", client);
+                Customer customer = customerRepository.clientFindByDocumentNumber(name);
+                if (customer.idClient > 0) {
+                    return new JsonObject().put("response", customer);
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -96,12 +96,12 @@ public class ClientImpl {
             JsonObject genderData = data.getJsonObject("gender");
             JsonObject documentData = data.getJsonObject("document");
 
-            Client client = new Client();
+            Customer customer = new Customer();
 
             if (!genderData.isEmpty()) {
                 Gender gender = genderRepository.genderFindById(genderData.getLong("genderId"));
                 if (gender.idGender > 0) {
-                    client.gender = gender;
+                    customer.gender = gender;
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -111,21 +111,21 @@ public class ClientImpl {
             if (!documentData.isEmpty()) {
                 Document document = documentRepository.findDocumentById(documentData.getLong("idDocument"));
                 if (document.idDocument > 0) {
-                    client.document = document;
+                    customer.document = document;
                 } else {
                     return messages.messageListEmpty();
                 }
             } else {
                 return messages.messageDataInput();
             }
-            client.documentNumber = data.getString("documentNumber");
-            client.dateOfBirth = new Date();
-            client.name = data.getString("name");
-            client.paternalSurname = data.getString("paternalSurname");
-            client.maternalSurname = data.getString("maternalSurname");
-            client.dateCreate = new Date();
-            client.userCreate = data.getInteger("userCreate");
-            clientRepository.clientSave(client);
+            customer.documentNumber = data.getString("documentNumber");
+            customer.dateOfBirth = new Date();
+            customer.name = data.getString("name");
+            customer.paternalSurname = data.getString("paternalSurname");
+            customer.maternalSurname = data.getString("maternalSurname");
+            customer.dateCreate = new Date();
+            customer.userCreate = data.getInteger("userCreate");
+            customerRepository.clientSave(customer);
             return new JsonObject().put("response", "El cliente ha sido registrado correctamente");
         } catch (Exception e) {
             return messages.messageError();
@@ -137,12 +137,12 @@ public class ClientImpl {
             JsonObject genderData = data.getJsonObject("gender");
             JsonObject documentData = data.getJsonObject("document");
 
-            Client client = new Client();
+            Customer customer = new Customer();
 
             if (!genderData.isEmpty()) {
                 Gender gender = genderRepository.genderFindById(genderData.getLong("genderId"));
                 if (gender.idGender > 0) {
-                    client.gender = gender;
+                    customer.gender = gender;
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -152,22 +152,22 @@ public class ClientImpl {
             if (!documentData.isEmpty()) {
                 Document document = documentRepository.findDocumentById(documentData.getLong("idDocument"));
                 if (document.idDocument > 0) {
-                    client.document = document;
+                    customer.document = document;
                 } else {
                     return messages.messageListEmpty();
                 }
             } else {
                 return messages.messageDataInput();
             }
-            client.idClient = data.getLong("idClient");
-            client.documentNumber = data.getString("documentNumber");
-            client.dateOfBirth = new Date();
-            client.name = data.getString("name");
-            client.paternalSurname = data.getString("paternalSurname");
-            client.maternalSurname = data.getString("maternalSurname");
-            client.dateCreate = new Date();
-            client.userCreate = data.getInteger("userCreate");
-            clientRepository.clientSave(client);
+            customer.idClient = data.getLong("idClient");
+            customer.documentNumber = data.getString("documentNumber");
+            customer.dateOfBirth = new Date();
+            customer.name = data.getString("name");
+            customer.paternalSurname = data.getString("paternalSurname");
+            customer.maternalSurname = data.getString("maternalSurname");
+            customer.dateCreate = new Date();
+            customer.userCreate = data.getInteger("userCreate");
+            customerRepository.clientSave(customer);
             return new JsonObject().put("response", "El cliente ha sido editado correctamente");
         } catch (Exception e) {
             return messages.messageError();
@@ -178,7 +178,7 @@ public class ClientImpl {
         try {
             Long idClient = data.getLong("idClient");
             if (idClient > 0) {
-                if (clientRepository.clientDelete(idClient) > 0) {
+                if (customerRepository.clientDelete(idClient) > 0) {
                     return new JsonObject().put("response", "El cliente ha sido eliminado correctamente");
                 }else{
                     return messages.messageListEmpty();

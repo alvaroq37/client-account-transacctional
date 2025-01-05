@@ -1,6 +1,6 @@
-package client.rest;
+package customer.rest;
 
-import client.impl.GenderImpl;
+import customer.impl.GenderImpl;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

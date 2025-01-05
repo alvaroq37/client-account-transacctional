@@ -1,7 +1,7 @@
 package account.dao.data;
 
 import branch.dao.data.Branch;
-import client.dao.data.Client;
+import customer.dao.data.Customer;
 import currency.dao.data.Currency;
 import jakarta.persistence.*;
 import product.dao.data.Product;
@@ -28,9 +28,9 @@ public class Account {
     @Column(name = "user_update")
     public int userUpdate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Client.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "client_id")
-    public Client client;
+    public Customer customer;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Product.class)
     @JoinColumn(name = "product_id")
     public Product product;

@@ -1,4 +1,4 @@
-package client.dao.data;
+package customer.dao.data;
 
 import jakarta.persistence.*;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_gender")
+    @Column(name = "id")
     public long idGender;
     @Column(name = "description")
     public String description;

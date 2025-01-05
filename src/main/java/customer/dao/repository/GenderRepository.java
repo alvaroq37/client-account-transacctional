@@ -1,6 +1,6 @@
-package client.dao.repository;
+package customer.dao.repository;
 
-import client.dao.data.Gender;
+import customer.dao.data.Gender;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 

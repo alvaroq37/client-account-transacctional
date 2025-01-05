@@ -1,15 +1,15 @@
-package client.dao.data;
+package customer.dao.data;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "t_client")
-public class Client {
+@Table(name = "t_customer")
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_client")
+    @Column(name = "id")
     public long idClient;
     @Column(name = "document_number")
     public String documentNumber;

@@ -1,7 +1,7 @@
-package client.impl;
+package customer.impl;
 
-import client.dao.data.Document;
-import client.dao.repository.DocumentRepository;
+import customer.dao.data.Document;
+import customer.dao.repository.DocumentRepository;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

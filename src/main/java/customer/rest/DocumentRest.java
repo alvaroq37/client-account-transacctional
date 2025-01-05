@@ -1,7 +1,7 @@
-package client.rest;
+package customer.rest;
 
 
-import client.impl.DocumentImpl;
+import customer.impl.DocumentImpl;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

@@ -1,4 +1,4 @@
-package client.dao.data;
+package customer.dao.data;
 
 import jakarta.persistence.*;
 
@@ -10,7 +10,7 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_document")
+    @Column(name = "id")
     public long idDocument;
     @Column(name = "description")
     public String description;

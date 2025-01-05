@@ -4,8 +4,8 @@ import account.dao.data.Account;
 import account.dao.repository.AccountRepository;
 import branch.dao.data.Branch;
 import branch.dao.repository.BranchRepository;
-import client.dao.data.Client;
-import client.dao.repository.ClientRepository;
+import customer.dao.data.Customer;
+import customer.dao.repository.CustomerRepository;
 import currency.dao.data.Currency;
 import currency.dao.repository.CurrencyRepository;
 import io.vertx.core.json.JsonObject;
@@ -25,7 +25,7 @@ public class AccountImpl {
     @Inject
     AccountRepository accountRepository;
     @Inject
-    ClientRepository clientRepository;
+    CustomerRepository customerRepository;
     @Inject
     CurrencyRepository currencyRepository;
     @Inject
@@ -95,7 +95,7 @@ public class AccountImpl {
 
     public JsonObject createAccount(JsonObject data) {
         try {
-            JsonObject clientData = data.getJsonObject("client");
+            JsonObject clientData = data.getJsonObject("customer");
             JsonObject productData = data.getJsonObject("product");
             JsonObject currencyData = data.getJsonObject("currency");
             JsonObject branchData = data.getJsonObject("branch");
@@ -103,9 +103,9 @@ public class AccountImpl {
             Account account = new Account();
 
             if (!clientData.isEmpty()) {
-                Client client = clientRepository.clientFindById(clientData.getLong("clientId"));
-                if (client.idClient > 0) {
-                    account.client = client;
+                Customer customer = customerRepository.clientFindById(clientData.getLong("clientId"));
+                if (customer.idClient > 0) {
+                    account.customer = customer;
                 } else {
                     return messages.messageListEmpty();
                 }
@@ -173,7 +173,7 @@ public class AccountImpl {
 
     public JsonObject updateAccount(JsonObject data) {
         try {
-            JsonObject clientData = data.getJsonObject("client");
+            JsonObject clientData = data.getJsonObject("customer");
             JsonObject productData = data.getJsonObject("product");
             JsonObject currencyData = data.getJsonObject("currency");
             JsonObject branchData = data.getJsonObject("branch");
@@ -181,9 +181,9 @@ public class AccountImpl {
             Account account = new Account();
 
             if (!clientData.isEmpty()) {
-                Client client = clientRepository.clientFindById(clientData.getLong("clientId"));
-                if (client.idClient > 0) {
-                    account.client = client;
+                Customer customer = customerRepository.clientFindById(clientData.getLong("clientId"));
+                if (customer.idClient > 0) {
+                    account.customer = customer;
                 } else {
                     return messages.messageListEmpty();
                 }
