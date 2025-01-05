@@ -11,10 +11,12 @@ public class DepartmentRepository implements PanacheRepository<Department> {
     public List<Department> listAllDepartment() {
         return listAll();
     }
-    public void saveDepartment(Department department){
+
+    public void saveDepartment(Department department) {
         persist(department);
     }
-    public Department findDepartmentById(Long id){
+
+    public Department findDepartmentById(Long id) {
         return find("id", id).firstResult();
     }
 }

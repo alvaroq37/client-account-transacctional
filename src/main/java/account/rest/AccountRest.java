@@ -1,7 +1,6 @@
 package account.rest;
 
 import account.impl.AccountImpl;
-import client.impl.ClientImpl;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -22,37 +21,43 @@ public class AccountRest {
 
     @POST
     @Path("/list/all")
-    public Response clientListAll() {
+    public Response accountListAll() {
         return Response.ok(accountImpl.accountListAll()).build();
     }
 
     @POST
     @Path("/find/by/id")
-    public Response clientFindById(JsonObject jsonAccount) {
-        return accountImpl.accountFindByClient(jsonAccount);
+    public Response accountFindById(JsonObject data) {
+        return Response.ok(accountImpl.findAccountById(data)).build();
     }
 
     @POST
-    @Path("/find/by/name")
-    public Response clientFindByNames(JsonObject jsonAccount) {
-        return accountImpl.accountFindByNumberAccount(jsonAccount);
+    @Path("/find/by/number")
+    public Response accountFindByNumber(JsonObject data) {
+        return Response.ok(accountImpl.findAccountByNumber(data)).build();
+    }
+
+    @POST
+    @Path("/find/by/client/id")
+    public Response accountFindByClientId(JsonObject data) {
+        return Response.ok(accountImpl.findAccountByClientId(data)).build();
     }
 
     @POST
     @Path("/save")
-    public Response clientSave(JsonObject jsonAccount) {
-        return accountImpl.accountSave(jsonAccount);
+    public Response accountSave(JsonObject data) {
+        return Response.ok(accountImpl.createAccount(data)).build();
     }
 
     @POST
     @Path("/update")
-    public Response clientUpdate(JsonObject jsonAccount) {
-        return accountImpl.accountUpdate(jsonAccount);
+    public Response accountUpdate(JsonObject data) {
+        return Response.ok(accountImpl.updateAccount(data)).build();
     }
 
     @POST
     @Path("/delete")
-    public Response clientDelete(JsonObject jsonAccount) {
-        return accountImpl.accountDelete(jsonAccount);
+    public Response accountDelete(JsonObject data) {
+        return Response.ok(accountImpl.deleteAccount(data)).build();
     }
 }

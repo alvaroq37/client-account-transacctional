@@ -5,12 +5,14 @@ import currency.dao.repository.CurrencyRepository;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 
 import java.util.Date;
 import java.util.List;
 
+@ApplicationScoped
 public class CurrencyImpl {
     @Inject
     CurrencyRepository currencyRepository;

@@ -20,37 +20,37 @@ public class BranchRest {
 
     @GET
     @Path("/find/all")
-    public Response agencyFindAll() {
+    public Response branchFindAll() {
         return agencyImpl.agencyListAll();
     }
 
     @GET
     @Path("/find/by/id")
-    public Response agencyFindById(JsonObject jsonDataAgency){
+    public Response branchFindById(JsonObject jsonDataAgency){
         return agencyImpl.agencyFindById(jsonDataAgency);
     }
 
     @GET
     @Path("/find/by/name")
-    public Response agencyFindByName(JsonObject jsonDataAgency){
+    public Response branchFindByName(JsonObject jsonDataAgency){
         return agencyImpl.agencyFindByName(jsonDataAgency);
     }
 
     @POST
     @Path("/save")
-    public Response agencySave(JsonObject jsonDataAgency) {
+    public Response branchSave(JsonObject jsonDataAgency) {
         return agencyImpl.agencySave(jsonDataAgency);
     }
 
     @PUT
     @Path("/update")
-    public Response agencyUpdate(JsonObject jsonDataAgency) {
+    public Response branchUpdate(JsonObject jsonDataAgency) {
         return agencyImpl.agencyUpdate(jsonDataAgency);
     }
 
     @DELETE
     @Path("/delete")
-    public Response agencyDelete(JsonObject jsonDataAgency) {
+    public Response branchDelete(JsonObject jsonDataAgency) {
         return agencyImpl.agencyDelete(jsonDataAgency);
     }
 }

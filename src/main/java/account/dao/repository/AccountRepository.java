@@ -1,7 +1,6 @@
 package account.dao.repository;
 
 import account.dao.data.Account;
-import client.dao.data.Client;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
@@ -19,11 +18,11 @@ public class AccountRepository implements PanacheRepository<Account> {
         return find("idAccount", id).firstResult();
     }
 
-    public List<Account> accountFindByClient(long id) {
+    public List<Account> accountFindByClientId(long id) {
         return find("client.idClient", id).stream().toList();
     }
 
-    public Account accountFindByNumberAccount(String numberAccount) {
+    public Account accountFindByNumberAccount(Long numberAccount) {
         return find("numberAccount", numberAccount).firstResult();
     }
 

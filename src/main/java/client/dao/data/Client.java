@@ -11,6 +11,8 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_client")
     public long idClient;
+    @Column(name = "document_number")
+    public String documentNumber;
     @Column(name = "name")
     public String name;
     @Column(name = "paternal_surname")
