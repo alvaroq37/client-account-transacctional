@@ -3,12 +3,10 @@ package customer.dao.repository;
 import customer.dao.data.Customer;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 
 @ApplicationScoped
-@Transactional
 public class CustomerRepository implements PanacheRepository<Customer> {
 
     public List<Customer> clientListAll() {
@@ -16,7 +14,7 @@ public class CustomerRepository implements PanacheRepository<Customer> {
     }
 
     public Customer clientFindById(long id) {
-        return find("idClient", id).firstResult();
+        return find("id", id).firstResult();
     }
 
     public Customer clientFindByDocumentNumber(String ci) {
@@ -32,7 +30,7 @@ public class CustomerRepository implements PanacheRepository<Customer> {
     }
 
     public Long clientDelete(long id) {
-        return delete("idClient", id);
+        return delete("id", id);
     }
 
     public void clientUpdate(Customer customer) {

@@ -22,7 +22,8 @@ public class CustomerRest {
     @POST
     @Path("/list/all")
     public Response clientListAll() {
-        return Response.ok(clientImpl.clientListAll()).build();
+        //Response response = Response.ok(clientImpl.clientListAll()).build();
+        return clientImpl.clientListAll();
     }
 
     @POST

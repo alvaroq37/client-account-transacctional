@@ -10,7 +10,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long idClient;
+    public long id;
     @Column(name = "document_number")
     public String documentNumber;
     @Column(name = "name")
@@ -26,9 +26,9 @@ public class Customer {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
 
     @ManyToOne(targetEntity = Gender.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "gender_id")

@@ -104,7 +104,7 @@ public class AccountImpl {
 
             if (!clientData.isEmpty()) {
                 Customer customer = customerRepository.clientFindById(clientData.getLong("clientId"));
-                if (customer.idClient > 0) {
+                if (customer.id > 0) {
                     account.customer = customer;
                 } else {
                     return messages.messageListEmpty();
@@ -182,7 +182,7 @@ public class AccountImpl {
 
             if (!clientData.isEmpty()) {
                 Customer customer = customerRepository.clientFindById(clientData.getLong("clientId"));
-                if (customer.idClient > 0) {
+                if (customer.id > 0) {
                     account.customer = customer;
                 } else {
                     return messages.messageListEmpty();

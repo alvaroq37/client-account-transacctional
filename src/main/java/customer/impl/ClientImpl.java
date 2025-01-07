@@ -6,9 +6,11 @@ import customer.dao.data.Gender;
 import customer.dao.repository.CustomerRepository;
 import customer.dao.repository.DocumentRepository;
 import customer.dao.repository.GenderRepository;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import util.Messages;
 
 import java.util.Date;
@@ -24,16 +26,20 @@ public class ClientImpl {
     @Inject
     DocumentRepository documentRepository;
 
-    public JsonObject clientListAll() {
+    public Response clientListAll() {
         try {
+            JsonArray array = new JsonArray(customerRepository.clientListAll());
             List<Customer> customerList = customerRepository.clientListAll();
+
             if (!customerList.isEmpty()) {
-                return new JsonObject().put("response", customerList);
+                Response response = Response.ok(array).build();
+                return Response.ok(response.getEntity()).build();
+                //return new JsonObject().put("response", customerList);
             } else {
-                return messages.messageListEmpty();
+                return Response.ok(messages.messageListEmpty()).build();
             }
         } catch (Exception e) {
-            return messages.messageError();
+            return Response.ok(messages.messageError()).build();
         }
     }
 
@@ -42,7 +48,7 @@ public class ClientImpl {
             Long idClient = data.getLong("idClient");
             if (idClient > 0) {
                 Customer customer = customerRepository.clientFindById(idClient);
-                if (customer.idClient > 0) {
+                if (customer.id > 0) {
                     return new JsonObject().put("response", customer);
                 } else {
                     return messages.messageListEmpty();
@@ -78,7 +84,7 @@ public class ClientImpl {
             String name = data.getString("name");
             if (!name.isEmpty()) {
                 Customer customer = customerRepository.clientFindByDocumentNumber(name);
-                if (customer.idClient > 0) {
+                if (customer.id > 0) {
                     return new JsonObject().put("response", customer);
                 } else {
                     return messages.messageListEmpty();
@@ -159,7 +165,7 @@ public class ClientImpl {
             } else {
                 return messages.messageDataInput();
             }
-            customer.idClient = data.getLong("idClient");
+            customer.id = data.getLong("idClient");
             customer.documentNumber = data.getString("documentNumber");
             customer.dateOfBirth = new Date();
             customer.name = data.getString("name");
