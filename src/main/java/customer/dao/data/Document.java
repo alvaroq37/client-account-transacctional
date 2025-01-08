@@ -11,7 +11,7 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long idDocument;
+    public Long idDocument;
     @Column(name = "description")
     public String description;
     @Column(name = "date_create")
@@ -19,7 +19,7 @@ public class Document {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
 }

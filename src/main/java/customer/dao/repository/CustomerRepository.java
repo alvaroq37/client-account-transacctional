@@ -3,8 +3,10 @@ package customer.dao.repository;
 import customer.dao.data.Customer;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
+
 
 @ApplicationScoped
 public class CustomerRepository implements PanacheRepository<Customer> {

@@ -25,7 +25,7 @@ public class GenderRest {
     @POST
     @Path("/list/all")
     public Response genderListAll() {
-        return Response.ok(genderImpl.genderListAll()).build();
+        return genderImpl.genderListAll();
     }
     @POST
     @Path("/find/by/id")

@@ -30,10 +30,10 @@ public class Customer {
     @Column(name = "user_update")
     public Integer userUpdate;
 
-    @ManyToOne(targetEntity = Gender.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Gender.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "gender_id")
     public Gender gender;
-    @ManyToOne(targetEntity = Document.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Document.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "document_id")
     public Document document;
 }

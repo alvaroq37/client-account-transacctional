@@ -2,9 +2,11 @@ package customer.impl;
 
 import customer.dao.data.Gender;
 import customer.dao.repository.GenderRepository;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import util.Messages;
 
 import java.util.Date;
@@ -17,16 +19,17 @@ public class GenderImpl {
     @Inject
     GenderRepository genderRepository;
 
-    public JsonObject genderListAll() {
+    public Response genderListAll() {
         try {
-            List<Gender> genderList = genderRepository.genderListAll();
+            JsonArray genderList = new JsonArray(genderRepository.genderListAll());
             if (!genderList.isEmpty()) {
-                return new JsonObject().put("response", genderList);
+                Response response = Response.ok(genderList).build();
+                return Response.ok(response.getEntity()).build();
             } else {
-                return messages.messageListEmpty();
+                return Response.ok(messages.messageListEmpty()).build();
             }
         } catch (Exception e) {
-            return messages.messageError();
+            return Response.ok(messages.messageError()).build();
         }
     }
 

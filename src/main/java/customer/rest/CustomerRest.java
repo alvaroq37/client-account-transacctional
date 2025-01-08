@@ -22,7 +22,6 @@ public class CustomerRest {
     @POST
     @Path("/list/all")
     public Response clientListAll() {
-        //Response response = Response.ok(clientImpl.clientListAll()).build();
         return clientImpl.clientListAll();
     }
 
@@ -55,7 +54,7 @@ public class CustomerRest {
         return Response.ok( clientImpl.clientUpdate(data)).build();
     }
 
-    @DELETE
+    @POST
     @Path("/delete")
     public Response clientDelete(JsonObject data) {
         return Response.ok(clientImpl.clientDelete(data)).build();

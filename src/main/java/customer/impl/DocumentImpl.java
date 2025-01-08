@@ -2,9 +2,11 @@ package customer.impl;
 
 import customer.dao.data.Document;
 import customer.dao.repository.DocumentRepository;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import util.Messages;
 
 import java.util.Date;
@@ -16,16 +18,17 @@ public class DocumentImpl {
     @Inject
     DocumentRepository documentRepository;
 
-    public JsonObject listAllDocument() {
+    public Response listAllDocument() {
         try {
-            List<Document> documentList = documentRepository.listAllDocument();
+            JsonArray documentList = new JsonArray(documentRepository.listAllDocument());
             if (!documentList.isEmpty()) {
-                return new JsonObject().put("response", documentList);
+                Response response = Response.ok(documentList).build();
+                return Response.ok(response.getEntity()).build();
             } else {
-                return messages.messageListEmpty();
+                return Response.ok(messages.messageListEmpty()).build();
             }
         } catch (Exception e) {
-            return messages.messageError();
+            return Response.ok(messages.messageError()).build();
         }
     }
 

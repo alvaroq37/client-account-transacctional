@@ -26,7 +26,7 @@ public class DocumentRest {
     @POST
     @Path("/list/all")
     public Response documentListAll() {
-        return Response.ok(documentImpl.listAllDocument()).build();
+        return documentImpl.listAllDocument();
     }
     @POST
     @Path("/find/by/id")

@@ -13,8 +13,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import util.Messages;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @ApplicationScoped
 public class ClientImpl {
@@ -28,11 +28,10 @@ public class ClientImpl {
 
     public Response clientListAll() {
         try {
-            JsonArray array = new JsonArray(customerRepository.clientListAll());
-            List<Customer> customerList = customerRepository.clientListAll();
+            JsonArray customerList = new JsonArray(customerRepository.clientListAll());
 
             if (!customerList.isEmpty()) {
-                Response response = Response.ok(array).build();
+                Response response = Response.ok(customerList).build();
                 return Response.ok(response.getEntity()).build();
                 //return new JsonObject().put("response", customerList);
             } else {
@@ -105,7 +104,7 @@ public class ClientImpl {
             Customer customer = new Customer();
 
             if (!genderData.isEmpty()) {
-                Gender gender = genderRepository.genderFindById(genderData.getLong("genderId"));
+                Gender gender = genderRepository.genderFindById(genderData.getLong("idGender"));
                 if (gender.idGender > 0) {
                     customer.gender = gender;
                 } else {
@@ -124,13 +123,16 @@ public class ClientImpl {
             } else {
                 return messages.messageDataInput();
             }
+            String birth = data.getString("dateOfBirth");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            Date dateOfBirth = format.parse(birth);
             customer.documentNumber = data.getString("documentNumber");
-            customer.dateOfBirth = new Date();
+            customer.dateOfBirth = dateOfBirth;
             customer.name = data.getString("name");
             customer.paternalSurname = data.getString("paternalSurname");
             customer.maternalSurname = data.getString("maternalSurname");
             customer.dateCreate = new Date();
-            customer.userCreate = data.getInteger("userCreate");
+            //customer.userCreate = data.getInteger("userCreate");
             customerRepository.clientSave(customer);
             return new JsonObject().put("response", "El cliente ha sido registrado correctamente");
         } catch (Exception e) {
@@ -142,11 +144,10 @@ public class ClientImpl {
         try {
             JsonObject genderData = data.getJsonObject("gender");
             JsonObject documentData = data.getJsonObject("document");
-
-            Customer customer = new Customer();
+            Customer customer = customerRepository.clientFindById(data.getLong("id"));
 
             if (!genderData.isEmpty()) {
-                Gender gender = genderRepository.genderFindById(genderData.getLong("genderId"));
+                Gender gender = genderRepository.genderFindById(genderData.getLong("idGender"));
                 if (gender.idGender > 0) {
                     customer.gender = gender;
                 } else {
@@ -165,15 +166,15 @@ public class ClientImpl {
             } else {
                 return messages.messageDataInput();
             }
-            customer.id = data.getLong("idClient");
+            customer.id = data.getLong("id");
             customer.documentNumber = data.getString("documentNumber");
             customer.dateOfBirth = new Date();
             customer.name = data.getString("name");
             customer.paternalSurname = data.getString("paternalSurname");
             customer.maternalSurname = data.getString("maternalSurname");
-            customer.dateCreate = new Date();
-            customer.userCreate = data.getInteger("userCreate");
-            customerRepository.clientSave(customer);
+            customer.dateUpdate = new Date();
+            //customer.userCreate = data.getInteger("userCreate");
+            customerRepository.persistAndFlush(customer);
             return new JsonObject().put("response", "El cliente ha sido editado correctamente");
         } catch (Exception e) {
             return messages.messageError();
@@ -182,7 +183,7 @@ public class ClientImpl {
 
     public JsonObject clientDelete(JsonObject data) {
         try {
-            Long idClient = data.getLong("idClient");
+            Long idClient = data.getLong("id");
             if (idClient > 0) {
                 if (customerRepository.clientDelete(idClient) > 0) {
                     return new JsonObject().put("response", "El cliente ha sido eliminado correctamente");
