@@ -48,7 +48,7 @@ public class CustomerRest {
         return Response.ok(clientImpl.clientSave(data)).build();
     }
 
-    @PUT
+    @POST
     @Path("/update")
     public Response clientUpdate(JsonObject data) {
         return Response.ok( clientImpl.clientUpdate(data)).build();

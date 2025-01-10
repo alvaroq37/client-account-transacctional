@@ -16,7 +16,7 @@ public class ProductRest {
     @Inject
     ProductImpl productImpl;
 
-    @GET
+    @POST
     @Path("/list/all")
     public Response productListAll() {
         return Response.ok(productImpl.productListAll()).build();

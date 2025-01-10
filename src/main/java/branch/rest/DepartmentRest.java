@@ -19,7 +19,7 @@ public class DepartmentRest {
     @Inject
     DepartmentImpl departmentImpl;
 
-    @GET
+    @POST
     @Path("/find/all")
     public Response countryListAll() {
         return departmentImpl.listAllDepartment();

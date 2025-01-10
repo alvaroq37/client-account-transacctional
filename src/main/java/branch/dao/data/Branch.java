@@ -24,9 +24,9 @@ public class Branch {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
     @ManyToOne(targetEntity = City.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     public City city;

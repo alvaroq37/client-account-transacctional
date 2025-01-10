@@ -18,7 +18,7 @@ public class CountryRest {
     @Inject
     CountryImpl countryImpl;
 
-    @GET
+    @POST
     @Path("/find/all")
     public Response countryListAll() {
         return countryImpl.countryListAll();

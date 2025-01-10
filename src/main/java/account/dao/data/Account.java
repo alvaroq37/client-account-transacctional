@@ -24,9 +24,9 @@ public class Account {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "client_id")

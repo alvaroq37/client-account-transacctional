@@ -18,8 +18,8 @@ public class CurrencyRest {
     @Inject
     CurrencyImpl currencyImpl;
 
-    @GET
-    @Path("/find/all")
+    @POST
+    @Path("/list/all")
     public Response currencyListAll() {
         return currencyImpl.currencyListAll();
     }

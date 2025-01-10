@@ -8,9 +8,11 @@ import customer.dao.data.Customer;
 import customer.dao.repository.CustomerRepository;
 import currency.dao.data.Currency;
 import currency.dao.repository.CurrencyRepository;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import product.dao.data.Product;
 import product.dao.repository.ProductRepository;
 import util.Messages;
@@ -33,15 +35,16 @@ public class AccountImpl {
     @Inject
     ProductRepository productRepository;
 
-    public JsonObject accountListAll() {
+    public Response accountListAll() {
         try {
-            List<Account> accounts = accountRepository.accountListAll();
+            JsonArray accounts = new JsonArray(accountRepository.accountListAll());
             if (!accounts.isEmpty()) {
-                return new JsonObject().put("response", accounts);
+                Response response = Response.ok(accounts).build();
+                return Response.ok(response.getEntity()).build();
             }
-            return messages.messageListEmpty();
+            return Response.ok(messages.messageListEmpty()).build();
         } catch (Exception e) {
-            return messages.messageError();
+            return Response.ok(messages.messageError()).build();
         }
     }
 

@@ -18,8 +18,8 @@ public class BranchRest {
     @Inject
     BranchImpl agencyImpl;
 
-    @GET
-    @Path("/find/all")
+    @POST
+    @Path("/list/all")
     public Response branchFindAll() {
         return agencyImpl.agencyListAll();
     }

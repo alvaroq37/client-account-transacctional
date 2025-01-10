@@ -19,7 +19,7 @@ public class CityRest {
     @Inject
     CityImpl cityImpl;
 
-    @GET
+    @POST
     @Path("/find/all")
     public Response cityFindAll() throws JsonProcessingException {
         return cityImpl.cityListAll();

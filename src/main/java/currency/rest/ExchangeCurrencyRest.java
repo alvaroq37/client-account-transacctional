@@ -18,7 +18,7 @@ public class ExchangeCurrencyRest {
     @Inject
     ExchangeRateImpl exchangeRateImpl;
 
-    @GET
+    @POST
     @Path("/list/all")
     public Response currencyListAll() {
         return Response.ok(exchangeRateImpl.listAllExchangeRate()).build();

@@ -27,9 +27,9 @@ public class Enterprise {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
     @ManyToOne(targetEntity = Country.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id")
     public Country country;

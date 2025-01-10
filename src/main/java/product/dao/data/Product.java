@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "userCreate")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
 }

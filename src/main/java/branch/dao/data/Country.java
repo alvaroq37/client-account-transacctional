@@ -18,7 +18,7 @@ public class Country {
     @Column(name = "date_update")
     public Date dateUpdate;
     @Column(name = "user_create")
-    public int userCreate;
+    public Integer userCreate;
     @Column(name = "user_update")
-    public int userUpdate;
+    public Integer userUpdate;
 }

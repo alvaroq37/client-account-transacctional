@@ -20,7 +20,7 @@ public class EnterpriseRest {
     EnterpriseImpl enterpriseImpl;
 
     @Path("/list/all")
-    @GET
+    @POST
     public Response enterpriseListAll(){
         return enterpriseImpl.enterpriseListAll();
     }
